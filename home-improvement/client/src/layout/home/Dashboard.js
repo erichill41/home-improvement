@@ -1,7 +1,7 @@
 import React from "react";
 
-import ProjectList from "./projects/ProjectList";
-import BillsList from "./bills/BillsList";
+import ProjectList from "../projects/ProjectList";
+import BillsList from "../bills/BillsList";
 
 function Dashboard() {
   

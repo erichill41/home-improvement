@@ -3,8 +3,9 @@ import { Redirect, Switch, Route } from "react-router-dom";
 
 import Header from "./Header";
 import Dashboard from "./Dashboard";
-import ProjectCreate from "./projects/ProjectCreate";
-import BillCreate from "./bills/BillCreate";
+import ProjectCreate from "../projects/ProjectCreate";
+import BillCreate from "../bills/BillCreate";
+import BillEdit from "../bills/BillEdit";
 import NotFound from "./NotFound";
 
 function Layout () {
@@ -28,6 +29,9 @@ function Layout () {
         </Route>
         <Route exact path="/bills">
           <Redirect to={'/'} />
+        </Route>
+        <Route exact path="/bills/edit/:bill_id">
+          <BillEdit />
         </Route>
         <Route>
           <NotFound />

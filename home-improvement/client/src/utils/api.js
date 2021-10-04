@@ -54,6 +54,9 @@ export async function deleteProject(project_id, signal) {
   return await fetchJson(url, options);
 }
 
+
+/* ------------------------------------- */
+
 // Bills api functions
 export async function listBills(signal) {
   const url = `${api_url}/bills`;
@@ -77,6 +80,22 @@ export async function deleteBill(bill_id, signal) {
     method: "DELETE",
     headers,
     body: JSON.stringify({ data: {bill_id} }),
+    signal,
+  }
+  return await fetchJson(url, options);
+}
+
+export async function getBill(bill_id, signal) {
+  const url = `${api_url}/bills/${bill_id}`;
+  return await fetchJson(url, {headers, signal}, []);
+}
+
+export async function updateBill(bill, signal) {
+  const url = `${api_url}/bills/${bill.bill_id}`;
+  const options = {
+    method: "PUT",
+    headers,
+    body: JSON.stringify({ data: bill }),
     signal,
   }
   return await fetchJson(url, options);

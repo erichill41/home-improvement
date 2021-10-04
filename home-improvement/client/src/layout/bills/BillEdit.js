@@ -1,19 +1,21 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { createBill } from "../../utils/api";
+import { useHistory, useParams } from "react-router-dom";
+import { getBill, updateBill } from "../../utils/api";
 
-function BillCreate () {
+function BillEdit() {
+  const { bill_id } = useParams();
+  const [currentBill, setCurrentBill] = React.useState(bill_id);
   const history = useHistory();
-  const [currentBill, setCurrentBill] = React.useState({
-    "bill_name": "",
-    "bill_website": "",
-    "bill_date": "",
-    "bill_frequency": "",
-    "bill_type": "",
-    "bill_amount": "",
-  })
 
-  const handleChange = ({ target }) => {
+  // load bill to edit
+  React.useEffect(() => {
+    getBill(bill_id)
+      .then((response) => {
+        setCurrentBill({...response})
+      })
+  }, [bill_id, history]);
+
+  const handleChange = ({target}) => {
     setCurrentBill({
       ...currentBill,
       [target.name]: target.value,
@@ -21,16 +23,19 @@ function BillCreate () {
   }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(currentBill);
-    createBill({...currentBill});
-    history.push('/')
+    console.log(currentBill, 'SUBMITTED BILL')
+    updateBill(currentBill)
+    .then(history.push('/'))
+    console.log(currentBill, 'SUBMITTED BILL')
   }
+
+  console.log('CURRENT BILL -->', currentBill);
+
 
   return (
     <div className="container-fluid">
       <div className="text-center mb-4">
-        <h1 className="display-4 p-3"> Create a New Home Bill </h1>
+        <h1 className="display-4 p-3"> Edit {currentBill.bill_name} Bill </h1>
       </div>
     
       <div className="col-auto offset-3">
@@ -45,6 +50,7 @@ function BillCreate () {
                 name="bill_name"
                 required={true}
                 onChange={handleChange}
+                value={currentBill.bill_name}
               />
             </div>
 
@@ -57,6 +63,7 @@ function BillCreate () {
                 name="bill_website"
                 required={true}
                 onChange={handleChange}
+                value={currentBill.bill_website}
               />
             </div>
           </div>
@@ -71,6 +78,7 @@ function BillCreate () {
                 name="bill_date"
                 required={true}
                 onChange={handleChange}
+                value={currentBill.bill_date}
               />
             </div>
 
@@ -83,6 +91,7 @@ function BillCreate () {
                 name="bill_frequency"
                 required={true}
                 onChange={handleChange}
+                value={currentBill.bill_frequency}
               />
             </div>
           </div>
@@ -96,9 +105,10 @@ function BillCreate () {
                 name="bill_type"
                 required={true}
                 onChange={handleChange}
+                value={currentBill.bill_type}
                 list="datalistOptions"
               >
-                <option selected > Select fixed or variable bill amount </option>
+                <option selected > {currentBill.bill_type} </option>
                 <option value="Fixed"> Fixed </option>
                 <option value="Variable"> Variable </option>
               </select>
@@ -112,13 +122,14 @@ function BillCreate () {
                 className="form-control"
                 required={true}
                 onChange={handleChange}
+                value={currentBill.bill_amount}
                 placeholder="If variable, enter typical $ range"
               />
             </div>
           </div>
 
           <div className="col-4 offset-2">
-            <button type="button" className="btn btn-danger mr-2" onClick={() => history.goBack()}> Cancel </button>
+            <button type="button" className="btn btn-danger mr-2" onClick={() => history.push('/')}> Cancel </button>
             <button type="submit" className="btn btn-success"> Save Bill </button>
           </div>
         </form>
@@ -128,4 +139,4 @@ function BillCreate () {
   );
 }
 
-export default BillCreate;
+export default BillEdit;

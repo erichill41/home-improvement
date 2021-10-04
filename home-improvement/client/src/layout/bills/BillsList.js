@@ -31,7 +31,7 @@ function BillList() {
       <tr key={bill.bill_id}>
         <th scope="row">{bill.bill_id}</th>
         <td>{bill.bill_name}</td>
-        <td>{bill.bill_website}</td>
+        <td><a href={bill.bill_website}>{bill.bill_name} Login </a></td>
         <td>{bill.bill_date}</td>
         <td>{bill.bill_frequency}</td>
         <td>{bill.bill_type}</td>
@@ -39,7 +39,7 @@ function BillList() {
         <td>
           <button
             className="btn btn-info"
-            onClick={() => history.push('/bills/edit')}
+            onClick={() => history.push(`/bills/edit/${bill.bill_id}`)}
             value={bill.bill_id}
           >Edit Bill</button></td>
         <td>
