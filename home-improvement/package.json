@@ -1,0 +1,13 @@
+{
+  "name": "home-improvement",
+  "version": "1.0.0",
+  "description": "Application to track home projects, bills, etc.",
+  "main": "index.js",
+  "scripts": {
+    "start:dev": "npx concurrently 'npm run start:dev --prefix ./server' 'npm start --prefix ./client'"
+
+  },
+  "keywords": [],
+  "author": "Eric Hill",
+  "license": "ISC"
+}
