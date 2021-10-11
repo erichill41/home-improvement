@@ -68,8 +68,8 @@ function ProjectList() {
       <div className="container text-center">
         <h3 className="display-4 p-3"> Projects List </h3>
       </div>
-      <table className="table table-striped">
-        <thead className="table-dark">
+      <table className="table table-dark table-striped">
+        <thead>
           <tr>
             <th scope="col"> ID </th>
             <th scope="col"> Name </th>

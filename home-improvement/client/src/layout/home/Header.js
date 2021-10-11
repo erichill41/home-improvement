@@ -1,11 +1,12 @@
 import React from "react";
 import Navigation from "./Navigation";
 
+
 function Header() {
   return (
     <div className="container-fluid">
-    <header className="jumbotron p-3 bg-dark">
-      <div className="container text-center text-white">
+    <header className=" jumbotron p-3 bg-dark">
+      <div className="container text-center text-warning">
         <h1 className="display-2"> Home Improvement </h1>
       </div>
       <div className="pt-2">
